@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script
+    src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+    <form th:action="@{~/upload/save}" method="POST" enctype="multipart/form-data">    
+    <br><input type="text" id="phototext" class="form-control">
+    <input type="file" id="filename" name="photofile" onchange="readurl(this)" class="form-control">
+    <br><input type="submit" class="btn btn-primary" value="Upload">
+    <br><img src="#" id="avatar" alt="Photo" width="50%">
+    </form>
+
+</body>
+
+<script>
+    function readurl(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+    
+            reader.onload = function (e) {
+                $('#avatar').attr('src', e.target.result);
+                $('#phototext').val($('input[type=file]').val().replace(/C:\\fakepath\\/i,''))
+            };
+    
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+</html>

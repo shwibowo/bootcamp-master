@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<script
+src="https://code.jquery.com/jquery-3.7.1.min.js"
+integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+crossorigin="anonymous"></script>
+<p>Upload success</p>
+<p>
+    <button onclick="show()">Show image!</button>
+    <button onclick="javascript:location.replace('/upload/form')">Back to form</button>
+</p>
+<div id="imageshow" width="50%">
+</div>
+<script th:inline="javascript">
+console.log()
+function show() {
+    const file = "/images/" + [[${filename}]];
+    $('#imageshow').html('<img th:inline="text" src="'+file+'" width="80%">');
+}
+</script>
+
+</html>
