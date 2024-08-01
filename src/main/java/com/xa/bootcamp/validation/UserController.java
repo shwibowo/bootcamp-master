@@ -7,24 +7,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/user/")
+@RequestMapping("/user")
 public class UserController {
-    @GetMapping("register")
-    public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new UserModel());
-        return "register";
+
+    @GetMapping("/register")
+    public ModelAndView showRegistrationForm() {
+        ModelAndView view = new ModelAndView("user/register");
+        UserModel user = new UserModel();
+        view.addObject("user", user);
+        return view;
     }
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public String registerUser(@Valid @ModelAttribute("user") UserModel user, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "register";
+            return "user/register";
         }
         model.addAttribute("message", "User registered successfully!");
-        return "result";
+        return "user/result";
     }
+
 }
